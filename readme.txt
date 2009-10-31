@@ -1,10 +1,10 @@
-﻿=== Drag-To-Share eXtended ===
+=== Drag-To-Share eXtended ===
 Contributors: SyntaxTerr0r 
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9246512
 Tags: share, social, ajax
 Requires at least: 2.8
 Tested up to: 2.8.5
-Stable tag: trunk
+Stable tag: 1.0
 
 This plugin mimic the Mashable functionality where news stories and interesting articles can be shared to social networking sites.
 
