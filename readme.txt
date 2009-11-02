@@ -1,7 +1,7 @@
 ﻿=== Drag-To-Share eXtended ===
 Contributors: SyntaxTerr0r
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9246512
-Tags: share, social, ajax
+Tags: social, ajax, drag to share, social links, share, jquery, delicious, twitter, facebook, status update
 Requires at least: 2.8
 Tested up to: 2.8.5
 Stable tag: 1.02
