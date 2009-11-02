@@ -1,5 +1,5 @@
 ﻿=== Drag-To-Share eXtended ===
-Contributors: SyntaxTerr0r 
+Contributors: Milky-Interactive 
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9246512
 Tags: share, social, ajax
 Requires at least: 2.8

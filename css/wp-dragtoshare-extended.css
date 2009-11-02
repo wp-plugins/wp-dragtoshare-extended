@@ -16,7 +16,10 @@
 }
 
 #dtse-targets {
-  display:none; list-style-type:none; position:fixed; top:10px;
+  display:none;
+  list-style-type:none;
+  position:fixed;
+  top:10px;
   z-index:99999;
 }
 #dtse-targets li {

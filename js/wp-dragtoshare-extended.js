@@ -46,7 +46,7 @@ var dtsl =
 		// Loading Droppable targets into the DOM
 		makeTargets : function()
 		{
-			var html = '<ul id="dtse-targets"><li id="twitter"><a href="http://twitter.com"><!-- --></a></li><li id="delicious"><a href="http://delicious.com"><!-- --></a></li><li id="facebook"><a href="http://www.facebook.com"><!-- --></a></li></ul>';			
+			var html = '<ul id="dtse-targets"><li id="twitter"><a href="http://twitter.com"><!-- --></a></li><li id="delicious"><a href="http://delicious.com"><!-- --></a></li><li id="facebook"><a href="http://www.facebook.com"><!-- --></a></li></ul>';
 			jQuery("body").append(html);
 		},
 
