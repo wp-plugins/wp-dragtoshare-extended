@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: share, social, ajax
 Requires at least: 2.8
 Tested up to: 2.8.5
-Stable tag: 1.01
+Stable tag: 1.02
 
 This plugin mimic the Mashable functionality where news stories and interesting articles can be shared to social networking sites.
 
