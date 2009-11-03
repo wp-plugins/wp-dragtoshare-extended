@@ -25,14 +25,14 @@
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-
 // Init the plugins directory
-define('DTSE_ROOT', WP_CONTENT_URL.'/plugins/'.plugin_basename(dirname(__FILE__)).'/');
-define('DTSE_FSDIR', dirname( plugin_basename(__FILE__) ));
+define('DTSE_ABS_URL', WP_CONTENT_URL.'/plugins/'.plugin_basename(dirname(__FILE__)).'/');
+define('DTSE_REL_URL', dirname( plugin_basename(__FILE__) ));
+define('DTSE_ABS_PATH', WP_PLUGIN_DIR . '/' . plugin_basename(dirname(__FILE__)).'/' );
 
 // Include plugins files
-include_once(WP_PLUGIN_DIR . '/' . DTSE_FSDIR .'/lib/dtse.functions.php');
-include_once(WP_PLUGIN_DIR . '/' . DTSE_FSDIR .'/lib/dtse.admin.php');
+include_once(DTSE_ABS_PATH .'lib/dtse.functions.php');
+include_once(DTSE_ABS_PATH .'lib/dtse.admin.php');
 
 // Load translations
 add_filter('init', 'dtse_init_locale');

@@ -10,18 +10,18 @@ function dtse_options() {
 
   //Loading options
   $dtse_tooptips_label = 'dtse_tooptips';
-  $dtse_tooptips_value = get_option($dtse_tooptips_label);
+  $dtse_tooptips_value = strip_tags(stripslashes(get_option($dtse_tooptips_label)));
   
   $dtse_share_label = 'dtse_share';
-  $dtse_share_value = get_option($dtse_share_label);
+  $dtse_share_value = strip_tags(stripslashes(get_option($dtse_share_label)));
   
   $dtse_hidden = 'dtse_hidden';
   
   // Form was posted ?
   if($_POST[$dtse_hidden] == 'Y') {
   
-	$dtse_tooptips_value = $_POST[$dtse_tooptips_label];
-	$dtse_share_value = $_POST[$dtse_share_label];
+	$dtse_tooptips_value = strip_tags(stripslashes($_POST[$dtse_tooptips_label]));
+	$dtse_share_value = strip_tags(stripslashes($_POST[$dtse_share_label]));
 	
 	update_option($dtse_tooptips_label, $dtse_tooptips_value);
 	update_option($dtse_share_label, $dtse_share_value);

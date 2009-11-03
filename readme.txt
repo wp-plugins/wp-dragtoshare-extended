@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: social, ajax, drag to share, social links, share, jquery, delicious, twitter, facebook, status update
 Requires at least: 2.8
 Tested up to: 2.8.5
-Stable tag: 1.02
+Stable tag: 1.03
 
 This plugin mimic the Mashable functionality where news stories and interesting articles can be shared to social networking sites.
 
@@ -19,6 +19,24 @@ This plugin was bring to you by Milky Interactive.
 == Installation ==
 
 Extract the zip file and just drop the contents in the wp-content/plugins/ directory of your WordPress installation and then activate the Plugin from Plugins page.
+
+
+== Changelog ==
+
+1.03 : 
+- Minor fixes in backoffice : escaping and stripping HTML tags from strings submitted by users
+- Major fix on lib include paths
+- French translation updated.
+	   
+1.02 : 
+- Handling lib include paths
+
+1.01 : 
+- Minor fixes
+
+1.0 : 
+- First release
+
 
 == Special Thanks ==
 Special Thanks to Nettuts+ for their amazing article : http://net.tutsplus.com/tutorials/javascript-ajax/drag-to-share/
