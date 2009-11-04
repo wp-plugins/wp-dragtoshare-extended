@@ -1,4 +1,4 @@
-﻿<?php 
+<?php 
 
 //Init translation
 function dtse_init_locale(){

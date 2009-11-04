@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /*
 	Plugin Name: WP DragToShare eXtended
 	Plugin URI: http://www.lejournaldublog.com/plugin-wordpress-drag-to-share-extended
