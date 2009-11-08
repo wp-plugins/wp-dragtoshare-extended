@@ -23,6 +23,9 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 == Changelog ==
 
+1.05 :
+- Minor fixe on positioning.
+
 1.04 :
 - Adding sharing icons vertical positioning selection in plugin admin.
 - French translation updated.
