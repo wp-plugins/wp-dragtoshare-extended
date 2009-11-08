@@ -37,8 +37,6 @@ dtse_load_admin();
 // Load translations
 add_filter('init', 'dtse_init_locale');
 
-update_option('dtse_position', 'top');
-
 //Load css & javascript into blog header
 add_action('init', 'dtse_front_init_step_one');
 add_action('wp_head', 'dtse_front_init_step_two');
