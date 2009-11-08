@@ -4,7 +4,7 @@
 	Plugin URI: http://www.lejournaldublog.com/plugin-wordpress-drag-to-share-extended
 	Description: This plugin was bring to you by <a href="http://www.milky-interactive.com/" title="Milky Interactive" target="_blank">Milky Interactive</a>. <strong>This plugin mimic the Mashable functionality</strong> where news stories and interesting articles <strong>can be shared to social networking sites</strong>. The functionality is driven by the images accompanying the articles, you <strong>click and hold on an image</strong> and can then <strong>drag it into a toolbar</strong> to <strong>share it</strong>. <strong><em>It's brilliant and intuitive!</em></strong>
 	Author: SyntaxTerr0r
-	Version: 1.03
+	Version: 1.05
 	Author URI: http://www.milky-interactive.com
 */
 
@@ -32,7 +32,7 @@ define('DTSE_ABS_PATH', WP_PLUGIN_DIR . '/' . plugin_basename(dirname(__FILE__))
 
 // Include plugins files
 include_once(DTSE_ABS_PATH .'lib/dtse.functions.php');
-include_once(DTSE_ABS_PATH .'lib/dtse.admin.php');
+dtse_load_admin();
 
 // Load translations
 add_filter('init', 'dtse_init_locale');
@@ -45,6 +45,7 @@ add_action('wp_head', 'dtse_front_init_step_two');
 add_filter('the_content', 'dtse_add_class');
 
 //Register admin options
+//add_action('admin_init', 'dtse_load_admin');
 add_action('admin_menu', 'dtse_menu');
 
 //Default options on plugin activation

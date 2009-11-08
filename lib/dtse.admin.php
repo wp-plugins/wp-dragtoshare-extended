@@ -15,6 +15,9 @@ function dtse_options() {
   $dtse_share_label = 'dtse_share';
   $dtse_share_value = strip_tags(stripslashes(get_option($dtse_share_label)));
   
+  $dtse_position_label = 'dtse_position';
+  $dtse_position_value = get_option($dtse_position_label);
+  
   $dtse_hidden = 'dtse_hidden';
   
   // Form was posted ?
@@ -22,9 +25,11 @@ function dtse_options() {
   
 	$dtse_tooptips_value = strip_tags(stripslashes($_POST[$dtse_tooptips_label]));
 	$dtse_share_value = strip_tags(stripslashes($_POST[$dtse_share_label]));
+	$dtse_position_value = $_POST[$dtse_position_label];
 	
 	update_option($dtse_tooptips_label, $dtse_tooptips_value);
 	update_option($dtse_share_label, $dtse_share_value);
+	update_option($dtse_position_label, $dtse_position_value);
 	
 	?>
 	<div class="updated"><p><strong><?php _e('Options saved.', 'dtse' ); ?></strong></p></div>
@@ -47,6 +52,15 @@ function dtse_options() {
 		
 		<p><?php _e("Sharing label:", 'dtse' ); ?> 
 			<input type="text" name="<?php echo $dtse_share_label; ?>" value="<?php echo $dtse_share_value; ?>" size="20"> <small>(<?php _e('ie. the text displayed while dropping on a social icon', 'dtse'); ?>).</small>
+		</p>
+		
+		<p><?php _e("Sharing icons vertical positioning:", 'dtse'); ?>
+			<select name="<?php echo $dtse_position_label; ?>">
+				<option value="top"<?php if($dtse_position_value == 'top'):?> selected="selected"<?php endif;?>><?php _e("Top", 'dtse'); ?></option>
+				<option value="middle"<?php if($dtse_position_value == 'middle'):?> selected="selected"<?php endif;?>><?php _e("Middle", 'dtse'); ?></option>
+				<option value="bottom"<?php if($dtse_position_value == 'bottom'):?> selected="selected"<?php endif;?>><?php _e("Bottom", 'dtse'); ?></option>
+			</select>
+			<small>(<?php _e('ie. the vertical position you want social icons to appear', 'dtse'); ?>).</small>
 		</p>
 
 		<p class="submit">

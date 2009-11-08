@@ -26,6 +26,7 @@ function dtse_front_init_step_two() {
 		dtsl.front.init();
 		$dtsv.targetsLabel = \''.addslashes(get_option('dtse_share')).'\';
 		$dtsv.tipsLabel = \''.addslashes(get_option('dtse_tooptips')).'\';
+		$dtsv.targetsPosition = \''.get_option('dtse_position').'\';	
 	}); </script>';
 	echo "\n<!-- End of WP-DragToShare-eXtended Plugin -->\n\n";
 	return true;
@@ -36,9 +37,11 @@ function dtse_install() {
 
 	$dtse_share = get_option('dtse_share');
 	$dtse_tooptips = get_option('dtse_tooptips');
+	$dtse_position = get_option('dtse_position');
 	
 	if(empty($dtse_share)) update_option('dtse_tooptips', 'Drag this image to share the page');
 	if(empty($dtse_tooptips)) update_option('dtse_share', 'Share on');
+	if(empty($dtse_position)) update_option('dtse_position', 'top');
 }
 
 // Add a class to every image in a post
@@ -86,6 +89,10 @@ function dtse_add_class($content) {
 	} // end of $img_count > 0
 	
 	return $content;
+}
+
+function dtse_load_admin() {
+	include_once(DTSE_ABS_PATH .'lib/dtse.admin.php');
 }
 
 // Return known sociable networks
