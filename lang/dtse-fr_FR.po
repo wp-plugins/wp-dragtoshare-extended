@@ -34,6 +34,21 @@ msgstr "le texte affiché au moment du survol des images par la souris"
 msgid "ie. the text displayed while dropping on a social icon"
 msgstr "le texte affiché sous l'icône du réseau social"
 
+msgid "Sharing icons vertical positioning:"
+msgstr "Position des icônes :"
+
+msgid "Top"
+msgstr "Haut"
+
+msgid "Middle"
+msgstr "Milieu"
+
+msgid "Bottom"
+msgstr "Bas"
+
+msgid "ie. the vertical position you want social icons to appear"
+msgstr "le positionnement vertical que vous souhaitez pour les icônes de réseaux sociaux"
+
 msgid "Do you mind about our work ? Please support us !"
 msgstr "Vous aimez notre travail ? Faite un don !"
 

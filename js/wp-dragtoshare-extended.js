@@ -71,14 +71,39 @@ var dtsl =
 					jQuery("<div>").attr("id", "dtse-overlay").css("opacity", 0.7).appendTo("body");
 					jQuery("#dtse-tip").remove();
 					jQuery(this).unbind("mouseenter");
-					jQuery("#dtse-targets").css("left", (jQuery("body").width() / 2) - jQuery("#dtse-targets").width() / 2).slideDown();
+					
+					$dtsv.targetsID = jQuery("#dtse-targets");
+					
+					$dtsv.targetsID.css("left", (jQuery("body").width() / 2) - $dtsv.targetsID.width() / 2);
+								
+					// Position Middle
+					if($dtsv.targetsPosition == 'middle') {
+						var targetHeight = $dtsv.targetsID.height();
+						var middle = (jQuery(window).height() / 2 - targetHeight / 2);
+						
+						$dtsv.targetsID.css("top", middle+'px').slideDown();
+					}
+					
+					// Position Bottom
+					if($dtsv.targetsPosition == 'bottom') {
+						var targetHeight = $dtsv.targetsID.height();
+						var bottom = (jQuery(window).height() - (targetHeight *2) - 10);
+						
+						$dtsv.targetsID.css("top", bottom+'px').slideDown();
+					}
+					
+					// Position Top
+					if(($dtsv.targetsPosition == 'top') || ($dtsv.targetsPosition == undefined)) {
+						$dtsv.targetsID.slideDown();
+					}					
+										
 				  },
 				  
 				  
 				  //remove targets and overlay
 				  stop: function() {
-					jQuery("#dtse-targets").slideUp();
-					jQuery("span.dtse-share", "#dtse-targets").remove();
+					$dtsv.targetsID.slideUp();
+					jQuery("span.dtse-share", $dtsv.targetsID).remove();
 					jQuery("#dtse-overlay").remove();
 					jQuery(this).bind("mouseenter", dtsl.front.createTip);
 				  }
