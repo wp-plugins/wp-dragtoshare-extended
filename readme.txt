@@ -25,6 +25,7 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 1.06 :
 - Adding permalink sharing option. (In posts lists, the post permalink is shared instead of current URL)
+- Italian translation added (courtesy of Stefan @ http://www.stefandes.com)
 
 1.05 :
 - Minor fixe on positioning.

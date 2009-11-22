@@ -1,0 +1,72 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: dtse\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2009-11-22 15:27+0100\n"
+"Last-Translator: SyntaxTerror <seb@milky-interactive.com>\n"
+"Language-Team:  <admin@stefandes.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+
+msgid "Options saved."
+msgstr "Opzioni salvate."
+
+msgid "Options &bull; Drag-To-Share eXtended"
+msgstr "Opzioni &bull; Drag-To-Share eXtended"
+
+msgid "Tooltips Label:"
+msgstr "Testo  sull'immagine :"
+
+msgid "Sharing label:"
+msgstr "Teste delle icone :"
+
+msgid "Update Options"
+msgstr "Salva i cambiamenti"
+
+msgid "ie. the text displayed while rolling over an image"
+msgstr "il testo visualizzato mentre il mouse si posiziona sull'immagine"
+
+msgid "ie. the text displayed while dropping on a social icon"
+msgstr "testo visualizzato quando il mouse si posiziona sulle icone dei Social"
+
+msgid "Drag this image to share the page"
+msgstr "Trascina questa immagine per condividere questa pagina"
+
+msgid "Share on"
+msgstr "Condividi su"
+
+msgid "Sharing icons vertical positioning:"
+msgstr "Posizione delle icone:"
+
+msgid "Top"
+msgstr "Alto"
+
+msgid "Middle"
+msgstr "Medio"
+
+msgid "Bottom"
+msgstr "Basso"
+
+msgid "ie. the vertical position you want social icons to appear"
+msgstr "La posizione dove appariranno le  icone dei Social"
+
+msgid "Share posts permalink:"
+msgstr "Condividi la pagina corrente?"
+
+msgid "Yes"
+msgstr "Si"
+
+msgid "No"
+msgstr "No"
+
+msgid "ie. share posts permalinks when several posts are displayed, instead of current page"
+msgstr "Vuoi che l'utente condivida il link della pagina corrente?"
+
+msgid "Do you mind about our work ? Please support us !"
+msgstr "Ti è piaciuto il nostro lavoro? Supportaci! -  (tradotto in italiano da <a href=\"http://www.stefandes.com\" target=\"blank\">Business Online</a> Service)"
+
