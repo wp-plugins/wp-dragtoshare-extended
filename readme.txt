@@ -3,8 +3,8 @@ Contributors: SyntaxTerr0r
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9246512
 Tags: social, ajax, drag to share, social links, share, jquery, delicious, twitter, facebook, status update
 Requires at least: 2.8
-Tested up to: 2.8.5
-Stable tag: 1.06
+Tested up to: 2.8.6
+Stable tag: 1.07
 
 This plugin mimic the Mashable functionality where news stories and interesting articles can be shared to social networking sites.
 
@@ -22,6 +22,9 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 
 == Changelog ==
+
+1.07 :
+- Adding URL Shortening (http://is.gd/) for Twitter sharing
 
 1.06 :
 - Adding permalink sharing option. (In posts lists, the post permalink is shared instead of current URL)
