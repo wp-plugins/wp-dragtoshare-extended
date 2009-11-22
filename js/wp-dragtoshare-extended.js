@@ -160,12 +160,31 @@ var dtsl =
 					baseUrl = jQuery(this).find("a").attr("href");
 
 					if (id.indexOf("twitter") != -1) {
-					  window.location.href = baseUrl + "/home?status=" + $dtsv.title + ": " + currentUrl;
+					  dtsl.front.shareOnTwitter(baseUrl, currentUrl);
 					} else if (id.indexOf("delicious") != -1) {
 					  window.location.href = baseUrl + "/save?url=" + currentUrl + "&title=" + $dtsv.title;
 					} else if (id.indexOf("facebook") != -1) {
 					  window.location.href = baseUrl + "/sharer.php?u=" + currentUrl + "&t=" + $dtsv.title;
 					}
+				}
+			});
+		},
+
+		
+		shareOnTwitter : function(baseUrl, longUrl)
+		{		
+			jQuery.ajax({
+				type: "GET",
+				url: $dtsv.root+'lib/dtse.ajax.php',
+				data: 'longurl='+longUrl,
+				dataType: 'text',
+				success: function(response){
+					//console.log(response);
+					window.location.href = baseUrl + '/home?status=' + $dtsv.title + ': ' + response;
+				},
+				error: function(XMLHttpRequest, textStatus, errorThrown){
+					//console.log('error');
+					window.location.href = baseUrl + '/home?status=' + $dtsv.title + ': ' + longUrl;
 				}
 			});
 		}
