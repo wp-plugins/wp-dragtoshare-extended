@@ -8,6 +8,8 @@ Stable tag: 1.07
 
 This plugin mimic the Mashable functionality where news stories and interesting articles can be shared to social networking sites.
 
+Languages availables : english, italian, french
+
 
 == Description ==
 
