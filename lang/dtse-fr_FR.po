@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dtse\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2009-11-03 15:23+0100\n"
-"Last-Translator: SyntaxTerr0r <seb@milky-interactive.com>\n"
+"PO-Revision-Date: 2009-11-22 12:27+0100\n"
+"Last-Translator: SyntaxTerror <seb@milky-interactive.com>\n"
 "Language-Team:  <seb@milky-interactive.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -34,6 +34,12 @@ msgstr "le texte affiché au moment du survol des images par la souris"
 msgid "ie. the text displayed while dropping on a social icon"
 msgstr "le texte affiché sous l'icône du réseau social"
 
+msgid "Drag this image to share the page"
+msgstr "Faite glisser cette image pour partager l'article"
+
+msgid "Share on"
+msgstr "Partager sur"
+
 msgid "Sharing icons vertical positioning:"
 msgstr "Position des icônes :"
 
@@ -48,6 +54,18 @@ msgstr "Bas"
 
 msgid "ie. the vertical position you want social icons to appear"
 msgstr "le positionnement vertical que vous souhaitez pour les icônes de réseaux sociaux"
+
+msgid "Share posts permalink:"
+msgstr "Partager les permaliens des articles :"
+
+msgid "Yes"
+msgstr "Oui"
+
+msgid "No"
+msgstr "Non"
+
+msgid "ie. share posts permalinks when several posts are displayed, instead of current page"
+msgstr "Partage les permaliens des articles quand plusieurs articles sont affichés, plutôt que de partager la page courante"
 
 msgid "Do you mind about our work ? Please support us !"
 msgstr "Vous aimez notre travail ? Faite un don !"

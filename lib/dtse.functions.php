@@ -23,11 +23,13 @@ function dtse_front_init_step_two() {
 	echo ' <link href="'. DTSE_ABS_URL .'css/wp-dragtoshare-extended.css" rel="stylesheet" type="text/css" media="screen" />'."\n";
 	echo '<script type="text/javascript">
 	jQuery(window).load(function(){
-		dtsl.front.init();
 		$dtsv.targetsLabel = \''.addslashes(get_option('dtse_share')).'\';
 		$dtsv.tipsLabel = \''.addslashes(get_option('dtse_tooptips')).'\';
 		$dtsv.targetsPosition = \''.get_option('dtse_position').'\';	
-	}); </script>';
+		$dtsv.sharePermalink = '.get_option('dtse_permalink').';
+		dtsl.front.init();
+	}); 
+	</script>';
 	echo "\n<!-- End of WP-DragToShare-eXtended Plugin -->\n\n";
 	return true;
 }
@@ -38,13 +40,15 @@ function dtse_install() {
 	$dtse_share = get_option('dtse_share');
 	$dtse_tooptips = get_option('dtse_tooptips');
 	$dtse_position = get_option('dtse_position');
+	$dtse_permalink = get_option('dtse_permalink');
 	
-	if(empty($dtse_share)) update_option('dtse_tooptips', 'Drag this image to share the page');
-	if(empty($dtse_tooptips)) update_option('dtse_share', 'Share on');
+	if(empty($dtse_share)) update_option('dtse_tooptips', __("Drag this image to share the page", 'dtse'));
+	if(empty($dtse_tooptips)) update_option('dtse_share', __("Share on", 'dtse'));
 	if(empty($dtse_position)) update_option('dtse_position', 'top');
+	if(empty($dtse_permalink)) update_option('dtse_permalink', 'true');
 }
 
-// Add a class to every image in a post
+// Add classes to every image in a post
 function dtse_add_class($content) {
 	
 	//Is there any images here ?
@@ -62,7 +66,7 @@ function dtse_add_class($content) {
 			
 			// Appending a new classname to each images
 			foreach($matches[1] as $match) {
-				$replace = $match . ' dtse-img';
+				$replace = $match . ' dtse-img dtse-post-'.get_the_ID();
 				$content = str_ireplace($match, $replace, $content);
 			}
 			
@@ -77,7 +81,7 @@ function dtse_add_class($content) {
 			
 			// Appending a full class="dtse-img" to each images
 			foreach($matches[1] as $match) {
-				$replace = ' class="dtse-img"'. $match;
+				$replace = ' class="dtse-img dtse-post-'.get_the_ID().'"'. $match;
 				$content = str_ireplace($match, $replace, $content);
 			}
 			
@@ -87,6 +91,20 @@ function dtse_add_class($content) {
 		} // end of !empty($matches[1])
 	
 	} // end of $img_count > 0
+	
+	// Wanna share permalink instead of current page
+	$permalink = get_option('dtse_permalink');
+	
+	if($permalink == 'true')
+	{
+		$content .= "\n\n
+		<!-- Added by WP-DragToShare-eXtended Plugin -->
+		<script type=\"text/javascript\">
+			\$dtsv.dtse_post_".get_the_ID()."_permalink = '".get_permalink()."';
+			\$dtsv.dtse_post_".get_the_ID()."_title = '".addslashes(strip_tags(get_the_title()))."';
+		</script>
+		<!-- End of WP-DragToShare-eXtended Plugin -->";
+	}
 	
 	return $content;
 }
