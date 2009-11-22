@@ -50,15 +50,33 @@ var dtsl =
 			jQuery("body").append(html);
 		},
 
-
+		// Extract a 'dtse-post-X' from a multi class string, replace '-' by '-'
+		extractClassForPermalink: function(string)
+		{
+			//Looking for permalink
+			var reg = /(dtse-post-[0-9]+)/;
+			string = string.match(reg);
+			string = string[1].replace(/-/g, '_');
+			return string;
+		},
 		
 		// Activate drag feature on image
 		makeDraggable : function(id)
-		{
+		{					
 			id.draggable({
 					
 				  //create draggable helper
 				  helper: function() {
+				  
+				  //wanna share permalink instead of current page
+				  if($dtsv.sharePermalink == true)
+				  {
+					var class = jQuery(this).attr('class');
+					class = dtsl.front.extractClassForPermalink(class);
+					$dtsv.currentUrl = eval('$dtsv.'+class+'_permalink');
+					$dtsv.title = eval('$dtsv.'+class+'_title');
+				  }
+				  
 					return jQuery("<div>").attr("id", "dtse-helper").html("<span>" + $dtsv.title + "</span><img id='dtse-thumb' src='" + jQuery(this).attr("src") + "'>").appendTo("body");
 				  },
 				  cursor: "pointer",
@@ -98,8 +116,7 @@ var dtsl =
 					}					
 										
 				  },
-				  
-				  
+				  			  
 				  //remove targets and overlay
 				  stop: function() {
 					$dtsv.targetsID.slideUp();
@@ -131,8 +148,15 @@ var dtsl =
 					jQuery("<span>").addClass("dtse-share").text($dtsv.targetsLabel + ' ' + jQuery(this).attr("id")).addClass("active").appendTo(jQuery(this)).fadeIn();
 				},
 				drop: function() {
-					var id = jQuery(this).attr("id"),
-					  currentUrl = window.location.href,
+					var id = jQuery(this).attr("id");
+					var currentUrl = $dtsv.currentUrl;
+					
+					//wanna share current page instead of permalink
+					if($dtsv.sharePermalink == false) 
+					{
+						currentUrl = window.location.href;
+					}
+					
 					baseUrl = jQuery(this).find("a").attr("href");
 
 					if (id.indexOf("twitter") != -1) {
@@ -146,17 +170,5 @@ var dtsl =
 			});
 		}
 		
-	},
-
-
-	
-	//Backoffice functions
-	back:
-	{
-		// Launch everything for the back office...
-		init: function()
-		{
-			console.log('dtse backoffice launched');
-		}
 	}
 }

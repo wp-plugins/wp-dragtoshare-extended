@@ -18,6 +18,9 @@ function dtse_options() {
   $dtse_position_label = 'dtse_position';
   $dtse_position_value = get_option($dtse_position_label);
   
+  $dtse_permalink_label = 'dtse_permalink';
+  $dtse_permalink_value = get_option($dtse_permalink_value);
+  
   $dtse_hidden = 'dtse_hidden';
   
   // Form was posted ?
@@ -26,10 +29,12 @@ function dtse_options() {
 	$dtse_tooptips_value = strip_tags(stripslashes($_POST[$dtse_tooptips_label]));
 	$dtse_share_value = strip_tags(stripslashes($_POST[$dtse_share_label]));
 	$dtse_position_value = $_POST[$dtse_position_label];
+	$dtse_permalink_value = $_POST[$dtse_permalink_label];
 	
 	update_option($dtse_tooptips_label, $dtse_tooptips_value);
 	update_option($dtse_share_label, $dtse_share_value);
 	update_option($dtse_position_label, $dtse_position_value);
+	update_option($dtse_permalink_label, $dtse_permalink_value);
 	
 	?>
 	<div class="updated"><p><strong><?php _e('Options saved.', 'dtse' ); ?></strong></p></div>
@@ -61,6 +66,14 @@ function dtse_options() {
 				<option value="bottom"<?php if($dtse_position_value == 'bottom'):?> selected="selected"<?php endif;?>><?php _e("Bottom", 'dtse'); ?></option>
 			</select>
 			<small>(<?php _e('ie. the vertical position you want social icons to appear', 'dtse'); ?>).</small>
+		</p>
+		
+		<p><?php _e("Share posts permalink:", 'dtse'); ?>
+			<select name="<?php echo $dtse_permalink_label; ?>">
+				<option value="true"<?php if($dtse_permalink_value == 'true'):?> selected="selected"<?php endif;?>><?php _e("Yes", 'dtse'); ?></option>
+				<option value="false"<?php if($dtse_permalink_value == 'false'):?> selected="selected"<?php endif;?>><?php _e("No", 'dtse'); ?></option>
+			</select>
+			<small>(<?php _e('ie. share posts permalinks when several posts are displayed, instead of current page', 'dtse'); ?>).</small>
 		</p>
 
 		<p class="submit">
