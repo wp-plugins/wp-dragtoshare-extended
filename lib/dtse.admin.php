@@ -19,7 +19,7 @@ function dtse_options() {
   $dtse_position_value = get_option($dtse_position_label);
   
   $dtse_permalink_label = 'dtse_permalink';
-  $dtse_permalink_value = get_option($dtse_permalink_value);
+  $dtse_permalink_value = get_option($dtse_permalink_label);
   
   $dtse_auto_label = 'dtse_auto';
   $dtse_auto_value = get_option($dtse_auto_label);
