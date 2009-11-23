@@ -42,11 +42,13 @@ function dtse_install() {
 	$dtse_tooptips = get_option('dtse_tooptips');
 	$dtse_position = get_option('dtse_position');
 	$dtse_permalink = get_option('dtse_permalink');
+	$dtse_auto = get_option('dtse_auto');
 	
 	if(empty($dtse_share)) update_option('dtse_tooptips', __("Drag this image to share the page", 'dtse'));
 	if(empty($dtse_tooptips)) update_option('dtse_share', __("Share on", 'dtse'));
 	if(empty($dtse_position)) update_option('dtse_position', 'top');
 	if(empty($dtse_permalink)) update_option('dtse_permalink', 'true');
+	if(empty($dtse_auto)) update_option('dtse_auto', 'true');
 }
 
 // Add classes to every image in a post
@@ -93,9 +95,23 @@ function dtse_add_class($content) {
 	
 	} // end of $img_count > 0
 	
-	// Wanna share permalink instead of current page
-	$permalink = get_option('dtse_permalink');
+	return $content;
+}
+
+// Full article
+function dtse_content_filter($content) {
+
+	$content = dtse_add_class($content);
+	$content = dtse_content_script($content);
 	
+	return $content;
+}
+
+// Appending script to post content
+function dtse_content_script($content) {
+
+	global $permalink;
+
 	if($permalink == 'true')
 	{
 		$content .= "\n\n
@@ -107,6 +123,15 @@ function dtse_add_class($content) {
 		<!-- End of WP-DragToShare-eXtended Plugin -->";
 	}
 	
+	return $content;
+}
+
+// Handling img between shorcode
+function dtse_shortcode($atts, $content = null) {
+	return dtse_add_class($content);
+}
+
+function dtse_no_shortcode($atts, $content = null) {
 	return $content;
 }
 

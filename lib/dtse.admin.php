@@ -21,6 +21,9 @@ function dtse_options() {
   $dtse_permalink_label = 'dtse_permalink';
   $dtse_permalink_value = get_option($dtse_permalink_value);
   
+  $dtse_auto_label = 'dtse_auto';
+  $dtse_auto_value = get_option($dtse_auto_label);
+  
   $dtse_hidden = 'dtse_hidden';
   
   // Form was posted ?
@@ -30,11 +33,13 @@ function dtse_options() {
 	$dtse_share_value = strip_tags(stripslashes($_POST[$dtse_share_label]));
 	$dtse_position_value = $_POST[$dtse_position_label];
 	$dtse_permalink_value = $_POST[$dtse_permalink_label];
+	$dtse_auto_value = $_POST[$dtse_auto_label];
 	
 	update_option($dtse_tooptips_label, $dtse_tooptips_value);
 	update_option($dtse_share_label, $dtse_share_value);
 	update_option($dtse_position_label, $dtse_position_value);
 	update_option($dtse_permalink_label, $dtse_permalink_value);
+	update_option($dtse_auto_label, $dtse_auto_value);
 	
 	?>
 	<div class="updated"><p><strong><?php _e('Options saved.', 'dtse' ); ?></strong></p></div>
@@ -51,6 +56,16 @@ function dtse_options() {
 	<form name="dtse" method="post" action="">
 		<input type="hidden" name="<?php echo $dtse_hidden; ?>" value="Y">
 
+		<p><?php _e("Mode:", 'dtse'); ?>
+			<select name="<?php echo $dtse_auto_label; ?>">
+				<option value="true"<?php if($dtse_auto_value == 'true'):?> selected="selected"<?php endif;?>><?php _e("Automatic", 'dtse'); ?></option>
+				<option value="false"<?php if($dtse_auto_value == 'false'):?> selected="selected"<?php endif;?>><?php _e("Manual", 'dtse'); ?></option>
+			</select><br/>
+			<?php _e('<strong>Automatic mode:</strong> Every images in posts become draggable', 'dtse'); ?>.<br/>
+			<?php _e('<strong>Manual mode:</strong> Choose which images should be draggable using the <code>[dtse]</code> shortcode', 'dtse'); ?>.<br/>
+			<small><?php _e('Manual mode example to use in your post:', 'dtse'); ?> <code>[dtse]&lt;img src="my_img.png" alt="My Img" /&gt;[/dtse]</code></small>
+		</p>
+		
 		<p><?php _e("Tooltips Label:", 'dtse' ); ?> 
 			<input type="text" name="<?php echo $dtse_tooptips_label; ?>" value="<?php echo $dtse_tooptips_value; ?>" size="50"> <small>(<?php _e('ie. the text displayed while rolling over an image', 'dtse'); ?>).</small>
 		</p>
@@ -81,7 +96,6 @@ function dtse_options() {
 		</p>
 
 	</form>
-	<br/>
 	<hr/>
 	<strong><?php _e('Do you mind about our work ? Please support us !', 'dtse'); ?></strong>
 	<form action="https://www.paypal.com/cgi-bin/webscr" method="post">

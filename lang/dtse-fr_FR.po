@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dtse\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2009-11-22 12:27+0100\n"
-"Last-Translator: SyntaxTerror <seb@milky-interactive.com>\n"
+"PO-Revision-Date: 2009-11-23 14:47+0100\n"
+"Last-Translator: SyntaxTerr0r <seb@milky-interactive.com>\n"
 "Language-Team:  <seb@milky-interactive.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -69,4 +69,22 @@ msgstr "Partage les permaliens des articles quand plusieurs articles sont affich
 
 msgid "Do you mind about our work ? Please support us !"
 msgstr "Vous aimez notre travail ? Faite un don !"
+
+msgid "Mode: "
+msgstr "Mode : "
+
+msgid "Automatic"
+msgstr "Automatique"
+
+msgid "Manual"
+msgstr "Manuel"
+
+msgid "<strong>Automatic mode:</strong> Every images in posts become draggable"
+msgstr "<strong>Mode automatique :</strong> Toutes les images dans les articles deviennent draggables"
+
+msgid "<strong>Manual mode:</strong> Choose which images should be draggable using the <code>[dtse]</code> shortcode"
+msgstr "<strong>Mode manuel : </strong> Choisissez quelles images doivent être draggables en utilisant le shortcode <code>[dtse]</code> dans vos articles"
+
+msgid "Manual mode example to use in your post:"
+msgstr "Exemple pour le mode manuel :"
 
