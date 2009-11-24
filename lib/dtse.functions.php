@@ -23,11 +23,11 @@ function dtse_front_init_step_two() {
 	echo ' <link href="'. DTSE_ABS_URL .'css/wp-dragtoshare-extended.css" rel="stylesheet" type="text/css" media="screen" />'."\n";
 	echo '<script type="text/javascript">
 	jQuery(window).load(function(){
-		$dtsv.root = \''.DTSE_ABS_URL.'\';
-		$dtsv.targetsLabel = \''.addslashes(get_option('dtse_share')).'\';
-		$dtsv.tipsLabel = \''.addslashes(get_option('dtse_tooptips')).'\';
-		$dtsv.targetsPosition = \''.get_option('dtse_position').'\';	
-		$dtsv.sharePermalink = '.get_option('dtse_permalink').';
+		dtsv.root = \''.DTSE_ABS_URL.'\';
+		dtsv.targetsLabel = \''.addslashes(get_option('dtse_share')).'\';
+		dtsv.tipsLabel = \''.addslashes(get_option('dtse_tooptips')).'\';
+		dtsv.targetsPosition = \''.get_option('dtse_position').'\';	
+		dtsv.sharePermalink = '.get_option('dtse_permalink').';
 		dtsl.front.init();
 	}); 
 	</script>';
@@ -117,8 +117,8 @@ function dtse_content_script($content) {
 		$content .= "\n\n
 		<!-- Added by WP-DragToShare-eXtended Plugin -->
 		<script type=\"text/javascript\">
-			\$dtsv.dtse_post_".get_the_ID()."_permalink = '".get_permalink()."';
-			\$dtsv.dtse_post_".get_the_ID()."_title = '".addslashes(strip_tags(get_the_title()))."';
+			dtsv.dtse_post_".get_the_ID()."_permalink = '".get_permalink()."';
+			dtsv.dtse_post_".get_the_ID()."_title = '".addslashes(strip_tags(get_the_title()))."';
 		</script>
 		<!-- End of WP-DragToShare-eXtended Plugin -->";
 	}

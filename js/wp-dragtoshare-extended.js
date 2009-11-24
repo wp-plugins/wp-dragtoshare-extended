@@ -1,7 +1,7 @@
 ﻿/*****************************************************************/
 /* Global variables container : dtsv aka Drag-To-Share Variables */
 /*****************************************************************/
-window.$dtsv =
+window.dtsv =
 { 
 	title : document.title
 }
@@ -19,11 +19,11 @@ var dtsl =
 		init: function() 
 		{
 			dtsl.front.makeTargets();
-			$dtsv.images = jQuery("img.dtse-img");
-			dtsl.front.makeDraggable($dtsv.images);
+			dtsv.images = jQuery("img.dtse-img");
+			dtsl.front.makeDraggable(dtsv.images);
 			
-			$dtsv.targets = jQuery("#dtse-targets li");
-			dtsl.front.makeDroppable($dtsv.targets);			
+			dtsv.targets = jQuery("#dtse-targets li");
+			dtsl.front.makeDroppable(dtsv.targets);			
 		},
 
 
@@ -35,7 +35,7 @@ var dtsl =
 			if(jQuery("#dtse-tip").length === 0)
 			{ 
 				jQuery("<div>")
-				.html("<span>"+ $dtsv.tipsLabel +"<\/span><span class='arrow'><\/span>")
+				.html("<span>"+ dtsv.tipsLabel +"<\/span><span class='arrow'><\/span>")
 				.attr("id", "dtse-tip").css({ left:e.pageX + 30, top:e.pageY - 16 })
 				.appendTo("body").fadeIn(1800);
 			}
@@ -69,15 +69,15 @@ var dtsl =
 				  helper: function() {
 				  
 				  //wanna share permalink instead of current page
-				  if($dtsv.sharePermalink == true)
+				  if(dtsv.sharePermalink == true)
 				  {
 					var class = jQuery(this).attr('class');
 					class = dtsl.front.extractClassForPermalink(class);
-					$dtsv.currentUrl = eval('$dtsv.'+class+'_permalink');
-					$dtsv.title = eval('$dtsv.'+class+'_title');
+					dtsv.currentUrl = eval('dtsv.'+class+'_permalink');
+					dtsv.title = eval('dtsv.'+class+'_title');
 				  }
 				  
-					return jQuery("<div>").attr("id", "dtse-helper").html("<span>" + $dtsv.title + "</span><img id='dtse-thumb' src='" + jQuery(this).attr("src") + "'>").appendTo("body");
+					return jQuery("<div>").attr("id", "dtse-helper").html("<span>" + dtsv.title + "</span><img id='dtse-thumb' src='" + jQuery(this).attr("src") + "'>").appendTo("body");
 				  },
 				  cursor: "pointer",
 				  cursorAt: { left: 180, top: 53 },
@@ -90,37 +90,37 @@ var dtsl =
 					jQuery("#dtse-tip").remove();
 					jQuery(this).unbind("mouseenter");
 					
-					$dtsv.targetsID = jQuery("#dtse-targets");
+					dtsv.targetsID = jQuery("#dtse-targets");
 					
-					$dtsv.targetsID.css("left", (jQuery("body").width() / 2) - $dtsv.targetsID.width() / 2);
+					dtsv.targetsID.css("left", (jQuery("body").width() / 2) - dtsv.targetsID.width() / 2);
 								
 					// Position Middle
-					if($dtsv.targetsPosition == 'middle') {
-						var targetHeight = $dtsv.targetsID.height();
+					if(dtsv.targetsPosition == 'middle') {
+						var targetHeight = dtsv.targetsID.height();
 						var middle = (jQuery(window).height() / 2 - targetHeight / 2);
 						
-						$dtsv.targetsID.css("top", middle+'px').slideDown();
+						dtsv.targetsID.css("top", middle+'px').slideDown();
 					}
 					
 					// Position Bottom
-					if($dtsv.targetsPosition == 'bottom') {
-						var targetHeight = $dtsv.targetsID.height();
+					if(dtsv.targetsPosition == 'bottom') {
+						var targetHeight = dtsv.targetsID.height();
 						var bottom = (jQuery(window).height() - (targetHeight *2) - 10);
 						
-						$dtsv.targetsID.css("top", bottom+'px').slideDown();
+						dtsv.targetsID.css("top", bottom+'px').slideDown();
 					}
 					
 					// Position Top
-					if(($dtsv.targetsPosition == 'top') || ($dtsv.targetsPosition == undefined)) {
-						$dtsv.targetsID.slideDown();
+					if((dtsv.targetsPosition == 'top') || (dtsv.targetsPosition == undefined)) {
+						dtsv.targetsID.slideDown();
 					}					
 										
 				  },
 				  			  
 				  //remove targets and overlay
 				  stop: function() {
-					$dtsv.targetsID.slideUp();
-					jQuery("span.dtse-share", $dtsv.targetsID).remove();
+					dtsv.targetsID.slideUp();
+					jQuery("span.dtse-share", dtsv.targetsID).remove();
 					jQuery("#dtse-overlay").remove();
 					jQuery(this).bind("mouseenter", dtsl.front.createTip);
 				  }
@@ -145,14 +145,14 @@ var dtsl =
 				//show info when over target
 				over: function() {
 					jQuery("span.dtse-share", "#dtse-targets").remove();
-					jQuery("<span>").addClass("dtse-share").text($dtsv.targetsLabel + ' ' + jQuery(this).attr("id")).addClass("active").appendTo(jQuery(this)).fadeIn();
+					jQuery("<span>").addClass("dtse-share").text(dtsv.targetsLabel + ' ' + jQuery(this).attr("id")).addClass("active").appendTo(jQuery(this)).fadeIn();
 				},
 				drop: function() {
 					var id = jQuery(this).attr("id");
-					var currentUrl = $dtsv.currentUrl;
+					var currentUrl = dtsv.currentUrl;
 					
 					//wanna share current page instead of permalink
-					if($dtsv.sharePermalink == false) 
+					if(dtsv.sharePermalink == false) 
 					{
 						currentUrl = window.location.href;
 					}
@@ -162,9 +162,9 @@ var dtsl =
 					if (id.indexOf("twitter") != -1) {
 					  dtsl.front.shareOnTwitter(baseUrl, currentUrl);
 					} else if (id.indexOf("delicious") != -1) {
-					  window.location.href = baseUrl + "/save?url=" + currentUrl + "&title=" + $dtsv.title;
+					  window.location.href = baseUrl + "/save?url=" + currentUrl + "&title=" + dtsv.title;
 					} else if (id.indexOf("facebook") != -1) {
-					  window.location.href = baseUrl + "/sharer.php?u=" + currentUrl + "&t=" + $dtsv.title;
+					  window.location.href = baseUrl + "/sharer.php?u=" + currentUrl + "&t=" + dtsv.title;
 					}
 				}
 			});
@@ -175,16 +175,16 @@ var dtsl =
 		{		
 			jQuery.ajax({
 				type: "GET",
-				url: $dtsv.root+'lib/dtse.ajax.php',
+				url: dtsv.root+'lib/dtse.ajax.php',
 				data: 'longurl='+longUrl,
 				dataType: 'text',
 				success: function(response){
 					//console.log(response);
-					window.location.href = baseUrl + '/home?status=' + $dtsv.title + ': ' + response;
+					window.location.href = baseUrl + '/home?status=' + dtsv.title + ': ' + response;
 				},
 				error: function(XMLHttpRequest, textStatus, errorThrown){
 					//console.log('error');
-					window.location.href = baseUrl + '/home?status=' + $dtsv.title + ': ' + longUrl;
+					window.location.href = baseUrl + '/home?status=' + dtsv.title + ': ' + longUrl;
 				}
 			});
 		}
