@@ -26,42 +26,46 @@ Languages : english, italian, french
 
 Extract the zip file and just drop the contents in the wp-content/plugins/ directory of your WordPress installation and then activate the Plugin from Plugins page.
 
+== Screenshots ==
+
+1. The plugin in action
+2. The admin panel
 
 == Changelog ==
 
-1.09 :
-- Fixed issue on Safari browser.
+= 1.09 =
+* Fixed issue on Safari browser.
 
-1.08 :
-- Choose between automatic mode or manual mode (All images draggables versus chosen ones). Manual mode works with [dtse] shortcode. Please report to the plugin admin panel.
+= 1.08 =
+* Choose between automatic mode or manual mode (All images draggables versus chosen ones). Manual mode works with [dtse] shortcode. Please report to the plugin admin panel.
 
-1.07 :
-- Adding URL Shortening (http://is.gd/) for Twitter sharing
+= 1.07 =
+* Adding URL Shortening (http://is.gd/) for Twitter sharing
 
-1.06 :
-- Adding permalink sharing option. (In posts lists, the post permalink is shared instead of current URL)
-- Italian translation added (courtesy of Stefan @ http://www.stefandes.com)
+= 1.06 =
+* Adding permalink sharing option. (In posts lists, the post permalink is shared instead of current URL)
+* Italian translation added (courtesy of Stefan @ http://www.stefandes.com)
 
-1.05 :
-- Minor fixe on positioning.
+= 1.05 =
+* Minor fixe on positioning.
 
-1.04 :
-- Adding sharing icons vertical positioning selection in plugin admin.
-- French translation updated.
+= 1.04 =
+* Adding sharing icons vertical positioning selection in plugin admin.
+* French translation updated.
 
-1.03 : 
-- Minor fixes in backoffice : escaping and stripping HTML tags from strings submitted by users
-- Major fix on lib include paths
-- French translation updated.
+= 1.03 =
+* Minor fixes in backoffice : escaping and stripping HTML tags from strings submitted by users
+* Major fix on lib include paths
+* French translation updated.
 	   
-1.02 : 
-- Handling lib include paths
+= 1.02 = 
+* Handling lib include paths
 
-1.01 : 
-- Minor fixes
+= 1.01 = 
+* Minor fixes
 
-1.0 : 
-- First release
+= 1.0 =
+* First release
 
 
 == Special Thanks ==
