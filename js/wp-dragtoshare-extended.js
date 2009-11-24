@@ -4,7 +4,7 @@
 window.dtsv =
 { 
 	title : document.title
-}
+};
 
 /*****************************************************************/
 /**** Global library object : dtsl aka Drag-To-Share Library *****/
@@ -69,12 +69,12 @@ var dtsl =
 				  helper: function() {
 				  
 				  //wanna share permalink instead of current page
-				  if(dtsv.sharePermalink == true)
+				  if(dtsv.sharePermalink === true)
 				  {
-					var class = jQuery(this).attr('class');
-					class = dtsl.front.extractClassForPermalink(class);
-					dtsv.currentUrl = eval('dtsv.'+class+'_permalink');
-					dtsv.title = eval('dtsv.'+class+'_title');
+					var cssClass = jQuery(this).attr('class');
+					cssClass = dtsl.front.extractClassForPermalink(cssClass);
+					dtsv.currentUrl = eval('dtsv.'+cssClass+'_permalink');
+					dtsv.title = eval('dtsv.'+cssClass+'_title');
 				  }
 				  
 					return jQuery("<div>").attr("id", "dtse-helper").html("<span>" + dtsv.title + "</span><img id='dtse-thumb' src='" + jQuery(this).attr("src") + "'>").appendTo("body");
@@ -93,30 +93,32 @@ var dtsl =
 					dtsv.targetsID = jQuery("#dtse-targets");
 					
 					dtsv.targetsID.css("left", (jQuery("body").width() / 2) - dtsv.targetsID.width() / 2);
-								
+					
+					var targetHeight = dtsv.targetsID.height();
+						
 					// Position Middle
 					if(dtsv.targetsPosition == 'middle') {
-						var targetHeight = dtsv.targetsID.height();
-						var middle = (jQuery(window).height() / 2 - targetHeight / 2);
 						
+						var middle = (jQuery(window).height() / 2 - targetHeight / 2);
 						dtsv.targetsID.css("top", middle+'px').slideDown();
+						
 					}
 					
 					// Position Bottom
 					if(dtsv.targetsPosition == 'bottom') {
-						var targetHeight = dtsv.targetsID.height();
+
 						var bottom = (jQuery(window).height() - (targetHeight *2) - 10);
-						
 						dtsv.targetsID.css("top", bottom+'px').slideDown();
+						
 					}
 					
 					// Position Top
-					if((dtsv.targetsPosition == 'top') || (dtsv.targetsPosition == undefined)) {
+					if((dtsv.targetsPosition == 'top') || (dtsv.targetsPosition === undefined)) {
 						dtsv.targetsID.slideDown();
 					}					
 										
 				  },
-				  			  
+  
 				  //remove targets and overlay
 				  stop: function() {
 					dtsv.targetsID.slideUp();
@@ -152,7 +154,7 @@ var dtsl =
 					var currentUrl = dtsv.currentUrl;
 					
 					//wanna share current page instead of permalink
-					if(dtsv.sharePermalink == false) 
+					if(dtsv.sharePermalink === false) 
 					{
 						currentUrl = window.location.href;
 					}
@@ -190,4 +192,4 @@ var dtsl =
 		}
 		
 	}
-}
+};
