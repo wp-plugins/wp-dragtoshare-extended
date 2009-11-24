@@ -12,7 +12,7 @@ function dtse_front_init_step_one() {
 	wp_enqueue_script('jquery-ui-core', false, array('jquery'));
 	wp_enqueue_script('jquery-ui-draggable', false, array('jquery', 'jquery-ui-core'));
 	wp_enqueue_script('jquery-ui-droppable', false, array('jquery', 'jquery-ui-core'));
-	wp_enqueue_script('dragtoshare-extended', DTSE_ABS_URL . 'js/wp-dragtoshare-extended.js', array('jquery', 'jquery-ui-core', 'jquery-ui-draggable','jquery-ui-droppable'), '1.0');
+	wp_enqueue_script('dragtoshare-extended', DTSE_ABS_URL . 'js/wp-dragtoshare-extended-packed.js', array('jquery', 'jquery-ui-core', 'jquery-ui-draggable','jquery-ui-droppable'), '1.1');
 	return true;
 }
 
@@ -20,7 +20,7 @@ function dtse_front_init_step_one() {
 function dtse_front_init_step_two() {
 
 	echo "\n<!-- Added by WP-DragToShare-eXtended Plugin -->\n";
-	echo ' <link href="'. DTSE_ABS_URL .'css/wp-dragtoshare-extended.css" rel="stylesheet" type="text/css" media="screen" />'."\n";
+	echo ' <link href="'. DTSE_ABS_URL .'css/wp-dragtoshare-extended-packed.css" rel="stylesheet" type="text/css" media="screen" />'."\n";
 	echo '<script type="text/javascript">
 	jQuery(window).load(function(){
 		dtsv.root = \''.DTSE_ABS_URL.'\';
