@@ -55,14 +55,14 @@ function dtse_install() {
 function dtse_add_class($content) {
 	
 	//Is there any images here ?
-	$img_pattern = "/<img(.*?)\/>/";
+	$img_pattern = "/<img(.*?)\/>/i";
 	preg_match_all($img_pattern, $content, $matches);	
 	$img_count = count($matches[1]);
 	
 	if($img_count > 0) {
 		
 		//Looking for an existing class="something" in post image
-		$img_pattern = "/img class=\"([^\"]*)\"/";
+		$img_pattern = "/img class=\"([^\"]*)\"/i";
 		preg_match_all($img_pattern, $content, $matches);
 		
 		if(!empty($matches[1])) {
@@ -70,7 +70,7 @@ function dtse_add_class($content) {
 			// Appending a new classname to each images
 			foreach($matches[1] as $match) {
 				$replace = $match . ' dtse-img dtse-post-'.get_the_ID();
-				$content = str_ireplace($match, $replace, $content);
+				$content = str_replace($match, $replace, $content);
 			}
 			
 			//Freeing some memory
@@ -79,13 +79,13 @@ function dtse_add_class($content) {
 		//No class found, adding it !
 		} else {
 		
-			$img_pattern = "/<img(.*?)\/>/";
+			$img_pattern = "/<img(.*?)\/>/i";
 			preg_match_all($img_pattern, $content, $matches);
 			
 			// Appending a full class="dtse-img" to each images
 			foreach($matches[1] as $match) {
 				$replace = ' class="dtse-img dtse-post-'.get_the_ID().'"'. $match;
-				$content = str_ireplace($match, $replace, $content);
+				$content = str_replace($match, $replace, $content);
 			}
 			
 			//Freeing some memory
