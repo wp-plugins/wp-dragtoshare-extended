@@ -114,11 +114,16 @@ function dtse_content_script($content) {
 
 	if($permalink == 'true')
 	{
+		//Sanitizing title
+		$title = strip_tags(get_the_title());
+		$title = html_entity_decode($title, ENT_QUOTES, get_bloginfo('charset'));
+		$title = addslashes($title);
+
 		$content .= "\n\n
 		<!-- Added by WP-DragToShare-eXtended Plugin -->
 		<script type=\"text/javascript\">
 			dtsv.dtse_post_".get_the_ID()."_permalink = '".get_permalink()."';
-			dtsv.dtse_post_".get_the_ID()."_title = '".addslashes(strip_tags(get_the_title()))."';
+			dtsv.dtse_post_".get_the_ID()."_title = '".$title."';
 		</script>
 		<!-- End of WP-DragToShare-eXtended Plugin -->";
 	}

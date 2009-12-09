@@ -6,6 +6,8 @@ window.dtsv =
 	title : document.title
 };
 
+var J = jQuery.noConflict();
+
 /*****************************************************************/
 /**** Global library object : dtsl aka Drag-To-Share Library *****/
 /*****************************************************************/
@@ -19,25 +21,24 @@ var dtsl =
 		init: function() 
 		{
 			dtsl.front.makeTargets();
-			dtsv.images = jQuery("img.dtse-img");
-			dtsl.front.makeDraggable(dtsv.images);
+			dtsv.images = J("img.dtse-img");
+			dtsl.front.makeDraggable();
 			
-			dtsv.targets = jQuery("#dtse-targets li");
-			dtsl.front.makeDroppable(dtsv.targets);			
+			dtsv.targets = J("#dtse-targets li");
+			dtsl.front.makeDroppable();
 		},
 
 
-		
 		// Create TootTip while overing images
 		createTip : function(e) 
 		{
 			//create tool tip if it doesn't exist
-			if(jQuery("#dtse-tip").length === 0)
+			if(J("#dtse-tip").length === 0)
 			{ 
-				jQuery("<div>")
+				J("<div>")
 				.html("<span>"+ dtsv.tipsLabel +"<\/span><span class='arrow'><\/span>")
 				.attr("id", "dtse-tip").css({ left:e.pageX + 30, top:e.pageY - 16 })
-				.appendTo("body").fadeIn(1800);
+				.appendTo("body").fadeIn(1200);
 			}
 		},
 
@@ -47,7 +48,7 @@ var dtsl =
 		makeTargets : function()
 		{
 			var html = '<ul id="dtse-targets"><li id="twitter"><a href="http://twitter.com"><!-- --></a></li><li id="delicious"><a href="http://delicious.com"><!-- --></a></li><li id="facebook"><a href="http://www.facebook.com"><!-- --></a></li></ul>';
-			jQuery("body").append(html);
+			J("body").append(html);
 		},
 
 		// Extract a 'dtse-post-X' from a multi class string, replace '-' by '-'
@@ -61,9 +62,9 @@ var dtsl =
 		},
 		
 		// Activate drag feature on image
-		makeDraggable : function(id)
+		makeDraggable : function()
 		{					
-			id.draggable({
+			dtsv.images.draggable({
 					
 				  //create draggable helper
 				  helper: function() {
@@ -71,13 +72,13 @@ var dtsl =
 				  //wanna share permalink instead of current page
 				  if(dtsv.sharePermalink === true)
 				  {
-					var cssClass = jQuery(this).attr('class');
+					var cssClass = J(this).attr('class');
 					cssClass = dtsl.front.extractClassForPermalink(cssClass);
 					dtsv.currentUrl = eval('dtsv.'+cssClass+'_permalink');
 					dtsv.title = eval('dtsv.'+cssClass+'_title');
 				  }
 				  
-					return jQuery("<div>").attr("id", "dtse-helper").html("<span>" + dtsv.title + "</span><img id='dtse-thumb' src='" + jQuery(this).attr("src") + "'>").appendTo("body");
+					return J("<div>").attr("id", "dtse-helper").html("<span>" + dtsv.title + "</span><img id='dtse-thumb' src='" + J(this).attr("src") + "'>").appendTo("body");
 				  },
 				  cursor: "pointer",
 				  cursorAt: { left: 180, top: 53 },
@@ -86,20 +87,20 @@ var dtsl =
 				  
 				  //show overlay and targets
 				  start: function() {
-					jQuery("<div>").attr("id", "dtse-overlay").css("opacity", 0.7).appendTo("body");
-					jQuery("#dtse-tip").remove();
-					jQuery(this).unbind("mouseenter");
+					J("<div>").attr("id", "dtse-overlay").css("opacity", 0.7).appendTo("body");
+					J("#dtse-tip").remove();
+					J(this).unbind("mouseenter");
 					
-					dtsv.targetsID = jQuery("#dtse-targets");
+					dtsv.targetsID = J("#dtse-targets");
 					
-					dtsv.targetsID.css("left", (jQuery("body").width() / 2) - dtsv.targetsID.width() / 2);
+					dtsv.targetsID.css("left", (J("body").width() / 2) - dtsv.targetsID.width() / 2);
 					
 					var targetHeight = dtsv.targetsID.height();
 						
 					// Position Middle
 					if(dtsv.targetsPosition == 'middle') {
 						
-						var middle = (jQuery(window).height() / 2 - targetHeight / 2);
+						var middle = (J(window).height() / 2 - targetHeight / 2);
 						dtsv.targetsID.css("top", middle+'px').slideDown();
 						
 					}
@@ -107,7 +108,7 @@ var dtsl =
 					// Position Bottom
 					if(dtsv.targetsPosition == 'bottom') {
 
-						var bottom = (jQuery(window).height() - (targetHeight *2) - 10);
+						var bottom = (J(window).height() - (targetHeight *2) - 10);
 						dtsv.targetsID.css("top", bottom+'px').slideDown();
 						
 					}
@@ -122,35 +123,35 @@ var dtsl =
 				  //remove targets and overlay
 				  stop: function() {
 					dtsv.targetsID.slideUp();
-					jQuery("span.dtse-share", dtsv.targetsID).remove();
-					jQuery("#dtse-overlay").remove();
-					jQuery(this).bind("mouseenter", dtsl.front.createTip);
+					J("span.dtse-share", dtsv.targetsID).remove();
+					J("#dtse-overlay").remove();
+					J(this).bind("mouseenter", dtsl.front.createTip);
 				  }
 			})
 			.bind("mouseenter", dtsl.front.createTip)
 			.mousemove(function(e) {	
-				jQuery("#dtse-tip").css({ left:e.pageX + 30, top:e.pageY - 16 });
+				J("#dtse-tip").css({ left:e.pageX + 30, top:e.pageY - 16 });
 			})
 			.mouseleave(function() {
-				jQuery("#dtse-tip").remove();
+				J("#dtse-tip").remove();
 			});		
 		},
 
 
 		
 		// Activate drop feature on targets
-		makeDroppable : function(id)
+		makeDroppable : function()
 		{
-			id.droppable({
+			dtsv.targets.droppable({
 				tolerance: "pointer",
 				
 				//show info when over target
 				over: function() {
-					jQuery("span.dtse-share", "#dtse-targets").remove();
-					jQuery("<span>").addClass("dtse-share").text(dtsv.targetsLabel + ' ' + jQuery(this).attr("id")).addClass("active").appendTo(jQuery(this)).fadeIn();
+					J("span.dtse-share", "#dtse-targets").remove();
+					J("<span>").addClass("dtse-share").text(dtsv.targetsLabel + ' ' + J(this).attr("id")).addClass("active").appendTo(J(this)).fadeIn();
 				},
 				drop: function() {
-					var id = jQuery(this).attr("id");
+					var id = J(this).attr("id");
 					var currentUrl = dtsv.currentUrl;
 					
 					//wanna share current page instead of permalink
@@ -159,7 +160,7 @@ var dtsl =
 						currentUrl = window.location.href;
 					}
 					
-					baseUrl = jQuery(this).find("a").attr("href");
+					baseUrl = J(this).find("a").attr("href");
 
 					if (id.indexOf("twitter") != -1) {
 					  dtsl.front.shareOnTwitter(baseUrl, currentUrl);
