@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: social, ajax, drag to share, social links, share, jquery, delicious, twitter, facebook, status update
 Requires at least: 2.8
 Tested up to: 2.8.6
-Stable tag: 1.11
+Stable tag: 1.12
 
 This plugin mimic the Mashable functionality where news stories and interesting articles can be shared to social networking sites.
 
@@ -32,6 +32,11 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 2. The admin panel
 
 == Changelog ==
+
+= 1.12 =
+* Sanitizing html entities from posts titles
+* Improving javascript compatibility with other framerworks than jQuery
+* Tooltips fade-in speed improved
 
 = 1.11 =
 * Various fixes to enhance PHP4 compatibility
