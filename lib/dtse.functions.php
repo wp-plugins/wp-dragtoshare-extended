@@ -28,6 +28,7 @@ function dtse_front_init_step_two() {
 		dtsv.tipsLabel = \''.addslashes(get_option('dtse_tooptips')).'\';
 		dtsv.targetsPosition = \''.get_option('dtse_position').'\';	
 		dtsv.sharePermalink = '.get_option('dtse_permalink').';
+		dtsv.networks = \''.dtse_get_social_conf().'\';
 		dtsl.front.init();
 	}); 
 	</script>';
@@ -35,7 +36,7 @@ function dtse_front_init_step_two() {
 	return true;
 }
 
-// Installing plugin for the first time : setting default value
+// Installing plugin for the first time or upgrading : setting default value
 function dtse_install() {
 
 	$dtse_share = get_option('dtse_share');
@@ -43,12 +44,19 @@ function dtse_install() {
 	$dtse_position = get_option('dtse_position');
 	$dtse_permalink = get_option('dtse_permalink');
 	$dtse_auto = get_option('dtse_auto');
+	$dtse_network = get_option('dtse_network');	
+	$default_network = array(
+		'Delicious' => 'on',
+		'Facebook' 	=> 'on',
+		'Twitter'	=> 'on'
+	);
 	
 	if(empty($dtse_share)) update_option('dtse_tooptips', __("Drag this image to share the page", 'dtse'));
 	if(empty($dtse_tooptips)) update_option('dtse_share', __("Share on", 'dtse'));
 	if(empty($dtse_position)) update_option('dtse_position', 'top');
 	if(empty($dtse_permalink)) update_option('dtse_permalink', 'true');
 	if(empty($dtse_auto)) update_option('dtse_auto', 'true');
+	if(empty($dtse_network)) update_option('dtse_network', $default_network);
 }
 
 // Add classes to every image in a post
@@ -136,86 +144,122 @@ function dtse_shortcode($atts, $content = null) {
 	return dtse_add_class($content);
 }
 
+// Placebo function for handling img between shorcode while automatic mode is enabled
 function dtse_no_shortcode($atts, $content = null) {
 	return $content;
 }
 
+// Just include admin lib
 function dtse_load_admin() {
 	include_once(DTSE_ABS_PATH .'lib/dtse.admin.php');
 }
 
-// Return known sociable networks
-/*
-function dtse_known_networks() {
+// Check URL
+function dtse_is_valid_URL($url) {
+	return preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $url);
+}
 
-	$known = array(
-		
-		'del.icio.us' => array(
-			'favicon' => 'delicious.png',
-			'url' => 'http://delicious.com/post?url=PERMALINK&amp;title=TITLE&amp;notes=EXCERPT',
-		),
+// Return shortened URL
+function dtse_is_gd($longUrl) {
 
-		'Digg' => array(
-			'favicon' => 'digg.png',
-			'url' => 'http://digg.com/submit?phase=2&amp;url=PERMALINK&amp;title=TITLE&amp;bodytext=EXCERPT',
-			'description' => 'Digg',
-		),
+	//Curl is available ?
+	if(function_exists("curl_init")) {
+	
+		//content provided is a valid URL ?
+		if((!empty($longUrl)) && (is_string($longUrl)) && (dtse_is_valid_URL($longUrl))){
+			
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, 'http://is.gd/api.php?longurl='.$longUrl);
+			curl_setopt($ch, CURLOPT_HEADER, 0);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 0);
+			$result = curl_exec($ch);
+			curl_close($ch);
+			
+			// Result provided is a valid URL ?
+			if((!empty($result)) && (is_string($result)) && (dtse_is_valid_URL($result))) {
+				echo $result;
+			}
+			
+		} else {
+			header("HTTP/1.1 404 Not Found");
+		}
+	
+	}
+}
 
-		'Facebook' => array(
-			'favicon' => 'facebook.png',
-			'url' => 'http://www.facebook.com/share.php?u=PERMALINK&amp;t=TITLE',
-		),
+// Get and Build social networks list
+function dtse_get_social_conf() {
 
-		'FriendFeed' => array(
-			'favicon' => 'friendfeed.png',
-			'url' => 'http://www.friendfeed.com/share?title=TITLE&amp;link=PERMALINK',
-		),
+	$myConf = get_option('dtse_network');
+	$allNetworks = dtse_all_networks();
+	
+	$html = '<ul id="dtse-targets">';
+	
+	foreach($myConf as $k => $v) {
+		$html .= '<li id="'.$k.'">';
+		$html .= '<a href="'.$allNetworks[$k]['url'].'"><!-- --></a>';
+		$html .= '</li>';
+	}
+	
+	$html .= '</ul>';
+	
+	return $html;
+}
 
-		'LinkedIn' => array(
-			'favicon' => 'linkedin.png',
-			'url' => 'http://www.linkedin.com/shareArticle?mini=true&amp;url=PERMALINK&amp;title=TITLE&amp;source=BLOGNAME&amp;summary=EXCERPT',
-		),
+// Return Supported Social Networks
+function dtse_all_networks() {
 
-		'MySpace' => array(
-			'favicon' => 'myspace.png',
-			'url' => 'http://www.myspace.com/Modules/PostTo/Pages/?u=PERMALINK&amp;t=TITLE',
-		),
-		
-		'Ping.fm' => array(
-			'favicon' => 'ping.png',
-			'url' => 'http://ping.fm/ref/?link=PERMALINK&amp;title=TITLE&amp;body=EXCERPT',
-		),
+$known = array(
+	
+	'Delicious' => array(
+		'favicon' 	=> 'delicious.png',
+		'url' 		=> 'http://delicious.com/'
+	),
 
-		'Reddit' => array(
-			'favicon' => 'reddit.png',
-			'url' => 'http://reddit.com/submit?url=PERMALINK&amp;title=TITLE',
-		),
+	'Digg' => array(
+		'favicon' 	=> 'digg.png',
+		'url' 		=> 'http://digg.com/'
+	),
 
-		'StumbleUpon' => array(
-			'favicon' => 'stumbleupon.png',
-			'url' => 'http://www.stumbleupon.com/submit?url=PERMALINK&amp;title=TITLE',
-		),
-		
-		'Technorati' => array(
-			'favicon' => 'technorati.png',
-			'url' => 'http://technorati.com/faves?add=PERMALINK',
-		),
-		
-		'TwitThis' => array(
-			'favicon' => 'twitter.png',
-			'url' => 'http://twitter.com/home?status=PERMALINK',
-		),
+	'Facebook' => array(
+		'favicon' 	=> 'facebook.png',
+		'url' 		=> 'http://www.facebook.com/'
+	),
 
-		'YahooBuzz' => array(
-			'favicon' => 'yahoobuzz.png',
-			'url' => 'http://buzz.yahoo.com/submit/?submitUrl=PERMALINK&amp;submitHeadline=TITLE&amp;submitSummary=EXCERPT&amp;submitCategory=science&amp;submitAssetType=text',
-			'description' => 'Yahoo! Buzz',
-		)
+	'LinkedIn' => array(
+		'favicon' 	=> 'linkedin.png',
+		'url' 		=> 'http://www.linkedin.com/'
+	),
 
-	);
+	'MySpace' => array(
+		'favicon' 	=> 'myspace.png',
+		'url' 		=> 'http://www.myspace.com/'
+	),
+	
+	'Reddit' => array(
+		'favicon' 	=> 'reddit.png',
+		'url' 		=> 'http://reddit.com/'
+	),
+
+	'StumbleUpon' => array(
+		'favicon' 	=> 'stumbleupon.png',
+		'url' 		=> 'http://www.stumbleupon.com/'
+	),
+	
+	'Technorati' => array(
+		'favicon' 	=> 'technorati.png',
+		'url' 		=> 'http://technorati.com/'
+	),
+	
+	'Twitter' => array(
+		'favicon' 	=> 'twitter.png',
+		'url' 		=> 'http://twitter.com/'
+	)
+
+);
 
 return $known;
+
 }
-*/
 
 ?>

@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: social, ajax, drag to share, social links, share, jquery, delicious, twitter, facebook, status update
 Requires at least: 2.8
 Tested up to: 2.8.6
-Stable tag: 1.12
+Stable tag: 1.13
 
 This plugin mimic the Mashable functionality where news stories and interesting articles can be shared to social networking sites.
 
@@ -13,11 +13,13 @@ Languages availables : english, italian, french
 
 == Description ==
 
-NEW : Choose between automatic or manual mode ! See changelog for more info!
+NEW : Choose your social networks !!
 
 This plugin mimic the Mashable functionality where news stories and interesting articles can be shared to social networking sites. 
 The functionality is driven by the images accompanying the articles, you click and hold on an image and can then drag it into a toolbar to share it. It's brilliant and intuitive!
 This plugin was bring to you by Milky Interactive.
+
+More to come : Customize with themes ! 
 
 Languages : english, italian, french
 
@@ -32,6 +34,11 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 2. The admin panel
 
 == Changelog ==
+
+= 1.13 =
+* Socials Networks choices added to admin Panel, choose from Facebook, Twitter, Delicious, Digg, LinkedIn, MySpace, Reddit, StumbleUpon or Technorati !!
+* New icons for socials networks
+* Open sharing link in new window/tabs
 
 = 1.12 =
 * Sanitizing html entities from posts titles
@@ -82,3 +89,4 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 == Special Thanks ==
 Special Thanks to Nettuts+ for their amazing article : http://net.tutsplus.com/tutorials/javascript-ajax/drag-to-share/
+Special Thanks to Tydlinka for her icon set : http://tydlinka.deviantart.com/art/Set-of-social-icons-109435724

@@ -47,8 +47,7 @@ var dtsl =
 		// Loading Droppable targets into the DOM
 		makeTargets : function()
 		{
-			var html = '<ul id="dtse-targets"><li id="twitter"><a href="http://twitter.com"><!-- --></a></li><li id="delicious"><a href="http://delicious.com"><!-- --></a></li><li id="facebook"><a href="http://www.facebook.com"><!-- --></a></li></ul>';
-			J("body").append(html);
+			J("body").append(dtsv.networks);
 		},
 
 		// Extract a 'dtse-post-X' from a multi class string, replace '-' by '-'
@@ -161,34 +160,69 @@ var dtsl =
 					}
 					
 					baseUrl = J(this).find("a").attr("href");
+					var customUrl = '';
 
-					if (id.indexOf("twitter") != -1) {
-					  dtsl.front.shareOnTwitter(baseUrl, currentUrl);
-					} else if (id.indexOf("delicious") != -1) {
-					  window.location.href = baseUrl + "/save?url=" + currentUrl + "&title=" + dtsv.title;
-					} else if (id.indexOf("facebook") != -1) {
-					  window.location.href = baseUrl + "/sharer.php?u=" + currentUrl + "&t=" + dtsv.title;
+					if (id.indexOf("Twitter") != -1) {
+					 	dtsl.front.isGD(baseUrl, currentUrl);
+					  
+					} else if (id.indexOf("Delicious") != -1) {
+						customUrl = "save?url=" + currentUrl + "&title=" + dtsv.title;
+						window.location.href = baseUrl + customUrl;
+					 
+					} else if (id.indexOf("Facebook") != -1) {
+						customUrl = "sharer.php?u=" + currentUrl + "&t=" + dtsv.title;
+						window.location.href = baseUrl + customUrl;
+					  
+					} else if (id.indexOf("Digg") != -1) {
+						customUrl = "submit?phase=2&url="+ currentUrl +"&title=" + dtsv.title + "&bodytext=";
+						window.location.href = baseUrl + customUrl;
+					  
+					} else if (id.indexOf("Reddit") != -1) {
+						customUrl = "submit?url="+ currentUrl +"&title=" + dtsv.title;
+						window.location.href = baseUrl + customUrl;
+					
+					} else if (id.indexOf("Technorati") != -1) {
+						customUrl = "faves?add=" + currentUrl;
+						window.location.href = baseUrl + customUrl;
+					  
+					} else if (id.indexOf("LinkedIn") != -1) {
+						customUrl = "shareArticle?mini=true&url="+ currentUrl +"&title=" + dtsv.title + "&source="+dtsv.title+"&summary=";
+						window.location.href = baseUrl + customUrl;
+					  
+					} else if (id.indexOf("StumbleUpon") != -1) {
+						customUrl = "submit?url="+ currentUrl +"&title=" + dtsv.title;
+						window.location.href = baseUrl + customUrl;
+					  
+					} else if (id.indexOf("MySpace") != -1) {
+						customUrl = "Modules/PostTo/Pages/?u="+ currentUrl +"&t=" + dtsv.title;
+						window.location.href = baseUrl + customUrl;
+					  
 					}
+					
 				}
 			});
 		},
 
 		
-		shareOnTwitter : function(baseUrl, longUrl)
-		{		
-			jQuery.ajax({
+		isGD : function(baseUrl, longUrl)
+		{
+		
+			var customUrl = '';
+			
+			J.ajax({
 				type: "GET",
 				url: dtsv.root+'lib/dtse.ajax.php',
-				data: 'longurl='+longUrl,
+				data: 'action=isgd&longurl='+longUrl,
 				dataType: 'text',
 				success: function(response){
-					//console.log(response);
-					window.location.href = baseUrl + '/home?status=' + dtsv.title + ': ' + response;
+					customUrl = 'home?status=' + dtsv.title + ': ' + response;
+					window.location.href = baseUrl + customUrl;
 				},
 				error: function(XMLHttpRequest, textStatus, errorThrown){
-					//console.log('error');
-					window.location.href = baseUrl + '/home?status=' + dtsv.title + ': ' + longUrl;
+					customUrl = 'home?status=' + dtsv.title + ': ' + longUrl;
+					window.location.href = baseUrl + customUrl;
 				}
+
 			});
 		}
 		

@@ -24,6 +24,9 @@ function dtse_options() {
   $dtse_auto_label = 'dtse_auto';
   $dtse_auto_value = get_option($dtse_auto_label);
   
+  $dtse_network_label = 'dtse_network';
+  $dtse_network_value = get_option($dtse_network_label);
+  
   $dtse_hidden = 'dtse_hidden';
   
   // Form was posted ?
@@ -34,12 +37,14 @@ function dtse_options() {
 	$dtse_position_value = $_POST[$dtse_position_label];
 	$dtse_permalink_value = $_POST[$dtse_permalink_label];
 	$dtse_auto_value = $_POST[$dtse_auto_label];
+	$dtse_network_value = $_POST[$dtse_network_label];
 	
 	update_option($dtse_tooptips_label, $dtse_tooptips_value);
 	update_option($dtse_share_label, $dtse_share_value);
 	update_option($dtse_position_label, $dtse_position_value);
 	update_option($dtse_permalink_label, $dtse_permalink_value);
 	update_option($dtse_auto_label, $dtse_auto_value);
+	update_option($dtse_network_label, $dtse_network_value);
 	
 	?>
 	<div class="updated"><p><strong><?php _e('Options saved.', 'dtse' ); ?></strong></p></div>
@@ -55,7 +60,9 @@ function dtse_options() {
   
 	<form name="dtse" method="post" action="">
 		<input type="hidden" name="<?php echo $dtse_hidden; ?>" value="Y">
-
+		
+		<h3><?php _e("Behaviour", 'dtse'); ?></h3>
+		
 		<p><?php _e("Mode:", 'dtse'); ?>
 			<select name="<?php echo $dtse_auto_label; ?>">
 				<option value="true"<?php if($dtse_auto_value == 'true'):?> selected="selected"<?php endif;?>><?php _e("Automatic", 'dtse'); ?></option>
@@ -65,14 +72,43 @@ function dtse_options() {
 			<?php _e('<strong>Manual mode:</strong> Choose which images should be draggable using the <code>[dtse]</code> shortcode', 'dtse'); ?>.<br/>
 			<small><?php _e('Manual mode example to use in your post:', 'dtse'); ?> <code>[dtse]&lt;img src="my_img.png" alt="My Img" /&gt;[/dtse]</code></small>
 		</p>
+
+		
+		<p><?php _e("Social Networks:", 'dtse'); ?>
+		
+		<?php $known = dtse_all_networks(); ?>
+			<ul style="display:block;width:500px;">
+			<?php foreach($known as $key => $value): ?>
+					<li style="display:inline-block;width:150px;">
+						<input <?php if(array_key_exists($key, $dtse_network_value) && $dtse_network_value[$key] == 'on'): ?>checked="checked" <?php endif; ?>type="checkbox" name="<?php echo $dtse_network_label; ?>[<?php echo $key; ?>]" /> 
+						<img style="vertical-align:middle;" src="<?php echo DTSE_ABS_URL.'img/admin/'.$known[$key]['favicon']; ?>" alt="<?php echo $key; ?>" /> <?php echo $key; ?>
+					</li>
+			<?php endforeach; ?>
+			</ul>
+		</p>
+
+
+		<p><?php _e("Share posts permalink:", 'dtse'); ?>
+			<select name="<?php echo $dtse_permalink_label; ?>">
+				<option value="true"<?php if($dtse_permalink_value == 'true'):?> selected="selected"<?php endif;?>><?php _e("Yes", 'dtse'); ?></option>
+				<option value="false"<?php if($dtse_permalink_value == 'false'):?> selected="selected"<?php endif;?>><?php _e("No", 'dtse'); ?></option>
+			</select>
+			<small>(<?php _e('ie. share posts permalinks when several posts are displayed, instead of current page', 'dtse'); ?>.)</small>
+		</p>
+
+
+		
+		<h3><?php _e("Look'N'Feel", 'dtse' ); ?></h3>
 		
 		<p><?php _e("Tooltips Label:", 'dtse' ); ?> 
 			<input type="text" name="<?php echo $dtse_tooptips_label; ?>" value="<?php echo $dtse_tooptips_value; ?>" size="50"> <small>(<?php _e('ie. the text displayed while rolling over an image', 'dtse'); ?>).</small>
 		</p>
 		
+		
 		<p><?php _e("Sharing label:", 'dtse' ); ?> 
 			<input type="text" name="<?php echo $dtse_share_label; ?>" value="<?php echo $dtse_share_value; ?>" size="20"> <small>(<?php _e('ie. the text displayed while dropping on a social icon', 'dtse'); ?>).</small>
 		</p>
+		
 		
 		<p><?php _e("Sharing icons vertical positioning:", 'dtse'); ?>
 			<select name="<?php echo $dtse_position_label; ?>">
@@ -83,13 +119,6 @@ function dtse_options() {
 			<small>(<?php _e('ie. the vertical position you want social icons to appear', 'dtse'); ?>).</small>
 		</p>
 		
-		<p><?php _e("Share posts permalink:", 'dtse'); ?>
-			<select name="<?php echo $dtse_permalink_label; ?>">
-				<option value="true"<?php if($dtse_permalink_value == 'true'):?> selected="selected"<?php endif;?>><?php _e("Yes", 'dtse'); ?></option>
-				<option value="false"<?php if($dtse_permalink_value == 'false'):?> selected="selected"<?php endif;?>><?php _e("No", 'dtse'); ?></option>
-			</select>
-			<small>(<?php _e('ie. share posts permalinks when several posts are displayed, instead of current page', 'dtse'); ?>).</small>
-		</p>
 
 		<p class="submit">
 			<input type="submit" name="Submit" value="<?php _e('Update Options', 'dtse' ) ?>" />
